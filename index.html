@@ -20,6 +20,7 @@
                         'float': 'float 6s ease-in-out infinite',
                         'blob': 'blob 7s infinite',
                         'pulse-slow': 'pulse 5s infinite',
+                        'fadeInUp': 'fadeInUp 0.8s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -31,6 +32,10 @@
                             '33%': { transform: 'scale(1.2, 0.9)' },
                             '66%': { transform: 'scale(0.9, 1.2)' },
                             '100%': { transform: 'scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
                         }
                     }
                 }
@@ -79,9 +84,25 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        
+        .mouse-follower {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(225, 29, 72, 0.3);
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            mix-blend-mode: multiply;
+            transition: transform 0.1s ease;
+        }
     </style>
 </head>
 <body class="font-sans bg-gradient-to-b from-rose-50 to-pink-100 text-gray-800 scroll-smooth">
+    <!-- Mouse follower effect -->
+    <div class="mouse-follower hidden md:block"></div>
+    
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-1/4 left-1/5 w-8 h-8 text-pink-300 animate-float delay-100">
             <i class="fas fa-heart text-4xl opacity-30"></i>
@@ -97,8 +118,8 @@
         </div>
     </div>
     
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-sm transition-all duration-300">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-sm transition-all duration-300 py-2">
+        <div class="container mx-auto px-6 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold flex items-center group">
                 <span class="text-gradient group-hover:text-pink-500 transition-all duration-300">RenaiBlake</span>
                 <span class="ml-2 text-pink-400 animate-pulse-slow">
@@ -128,40 +149,40 @@
                 </a>
             </div>
             
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none text-2xl">
-                <i class="fas fa-bars"></i>
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
         
-        <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur-sm px-6 pb-4">
-            <a href="#home" class="block py-3 text-white hover:text-pink-300 transition-colors border-b border-gray-700">Home</a>
-            <a href="#about" class="block py-3 text-white hover:text-pink-300 transition-colors border-b border-gray-700">About</a>
-            <a href="#content" class="block py-3 text-white hover:text-pink-300 transition-colors border-b border-gray-700">Content</a>
-            <a href="#links" class="block py-3 text-white hover:text-pink-300 transition-colors border-b border-gray-700">Links</a>
-            <a href="https://www.fanvue.com/renaiblake" class="block bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-5 py-3 rounded-full font-medium mt-4 text-center transition-all duration-300">
+        <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur-sm px-6 pb-4 transition-all duration-300">
+            <a href="#home" class="block py-2 text-white hover:text-pink-300 transition-colors border-b border-gray-700">Home</a>
+            <a href="#about" class="block py-2 text-white hover:text-pink-300 transition-colors border-b border-gray-700">About</a>
+            <a href="#content" class="block py-2 text-white hover:text-pink-300 transition-colors border-b border-gray-700">Content</a>
+            <a href="#links" class="block py-2 text-white hover:text-pink-300 transition-colors border-b border-gray-700">Links</a>
+            <a href="https://www.fanvue.com/renaiblake" class="block bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-5 py-2 rounded-full font-medium my-3 text-center transition-all duration-300">
                 Join Me
             </a>
         </div>
     </nav>
-    
+
     <section id="home" class="pt-32 pb-20 px-6">
         <div class="container mx-auto flex flex-col lg:flex-row items-center">
             <div class="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left relative">
                 <div class="absolute -top-20 -left-20 w-64 h-64 bg-purple-400/10 rounded-full filter blur-3xl"></div>
                 <div class="absolute bottom-0 right-10 w-40 h-40 bg-pink-400/10 rounded-full filter blur-3xl"></div>
                 
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight opacity-0 animate-fadeInUp">
                     Your Dream <span class="text-gradient">Asian GF</span> Experience
                 </h1>
-                <p class="text-lg md:text-xl mb-8 max-w-lg relative z-10">
+                <p class="text-lg md:text-xl mb-8 max-w-lg relative z-10 opacity-0 animate-fadeInUp" style="animation-delay: 0.2s">
                     Hi Love! I'm RenaiBlake, your sweet and playful Asian girlfriend fantasy. 
                     Let's create something special together behind closed doors...
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start relative z-10">
-                    <a href="https://www.fanvue.com/renaiblake" class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl glow-effect">
+                    <a href="https://www.fanvue.com/renaiblake" class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl glow-effect opacity-0 animate-fadeInUp" style="animation-delay: 0.4s">
                         <i class="fas fa-lock-open mr-2"></i>Join My Fanvue
                     </a>
-                    <a href="#about" class="border-2 border-pink-500 text-pink-600 hover:bg-pink-100/30 px-8 py-4 rounded-full font-semibold transition-all duration-300">
+                    <a href="#about" class="border-2 border-pink-500 text-pink-600 hover:bg-pink-100/30 px-8 py-4 rounded-full font-semibold transition-all duration-300 opacity-0 animate-fadeInUp" style="animation-delay: 0.6s">
                         <i class="fas fa-heart mr-2"></i>Know Me Better
                     </a>
                 </div>
@@ -171,7 +192,8 @@
                 <div class="w-full max-w-md mx-auto animate-float">
                     <div class="carousel-container w-full aspect-[9/13] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 glass-effect">
                         <div id="carousel" class="carousel-inner h-full relative">
-                            </div>
+                            <!-- Carousel items will be added by JavaScript -->
+                        </div>
                         <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition z-10 shadow hover:shadow-md focus:outline-none">
                             <i class="fas fa-chevron-left"></i>
                         </button>
@@ -179,18 +201,19 @@
                             <i class="fas fa-chevron-right"></i>
                         </button>
                         <div id="carousel-dots" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                            </div>
+                            <!-- Dots will be added by JavaScript -->
+                        </div>
                     </div>
                 </div>
                 <div class="absolute -z-10 w-96 h-96 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 filter blur-3xl animate-blob"></div>
             </div>
         </div>
     </section>
-    
+
     <section id="about" class="py-20 px-6 bg-white/50 backdrop-blur-sm relative">
         <div class="absolute inset-0 -z-10 pattern-dots pattern-indigo-200 pattern-bg-white pattern-size-6 pattern-opacity-10"></div>
         <div class="container mx-auto">
-            <div class="text-center mb-16 relative">
+            <div class="text-center mb-16 relative opacity-0 animate-fadeInUp">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">
                     <span class="text-gradient">About RenaiBlake</span>
                 </h2>
@@ -201,12 +224,12 @@
             
             <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2">
-                    <div class="rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-pink-300/30 hover:-translate-y-2">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-pink-300/30 hover:-translate-y-2 opacity-0 animate-fadeInUp" style="animation-delay: 0.2s">
                         <div class="glass-effect overflow-hidden">
-                            <img src="https://i.imgur.com/jPyhK58_d.png?maxwidth=520&shape=thumb&fidelity=high" alt="RenaiBlake" class="w-full transform hover:scale-105 transition duration-10000" loading="lazy">
+                            <img src="https://i.imgur.com/jPyhK58_d.png?maxwidth=520&shape=thumb&fidelity=high" alt="RenaiBlake" class="w-full transform hover:scale-105 transition duration-500" loading="lazy">
                         </div>
                     </div>
-                    <div class="mt-6 flex justify-center gap-4">
+                    <div class="mt-6 flex justify-center gap-4 opacity-0 animate-fadeInUp" style="animation-delay: 0.3s">
                         <a href="https://www.instagram.com/renaiiblakes2?igsh=dHNoczBmN3k0bGo2" class="w-14 h-14 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center text-white text-xl shadow-lg hover:-translate-y-1 transition-transform" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
@@ -221,23 +244,23 @@
                 
                 <div class="lg:w-1/2">
                     <div class="prose prose-pink max-w-none">
-                        <h3 class="text-2xl font-bold mb-6 relative pl-4 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-gradient-to-b from-pink-500 to-purple-500">
+                        <h3 class="text-2xl font-bold mb-6 relative pl-4 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-gradient-to-b from-pink-500 to-purple-500 opacity-0 animate-fadeInUp" style="animation-delay: 0.4s">
                             Hello lovely! Ready for our secret world?
                         </h3>
-                        <p class="mb-4 text-gray-700 leading-relaxed">
+                        <p class="mb-4 text-gray-700 leading-relaxed opacity-0 animate-fadeInUp" style="animation-delay: 0.5s">
                             I'm RenaiBlake, your dream Asian girlfriend fantasy come to life. Behind closed doors, I create the most intimate content exclusively for my most devoted fans who truly appreciate the finer, more personal experiences.
                         </p>
-                        <p class="mb-4 text-gray-700 leading-relaxed">
+                        <p class="mb-4 text-gray-700 leading-relaxed opacity-0 animate-fadeInUp" style="animation-delay: 0.6s">
                             On Fanvue, our connection goes beyond the surface. From sweet girlfriend roleplay to more private moments, I share exclusive experiences that you won't find anywhere else. Each piece of content is crafted with my special touches.
                         </p>
-                        <div class="relative bg-pink-50/50 border-l-4 border-pink-400 p-4 my-6 rounded">
+                        <div class="relative bg-pink-50/50 border-l-4 border-pink-400 p-4 my-6 rounded opacity-0 animate-fadeInUp" style="animation-delay: 0.7s">
                             <i class="fas fa-quote-left text-pink-300 absolute top-1 left-2 text-2xl"></i>
                             <p class="text-gray-700 italic pl-6">
                                 "True intimacy is found in the details - the whispers, the glances, the moments you thought no one noticed."
                             </p>
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-8">
-                            <div class="glass-effect p-4 rounded-xl flex items-center gap-4 transition hover:-translate-y-1 hover:shadow-pink-200/30">
+                            <div class="glass-effect p-4 rounded-xl flex items-center gap-4 transition hover:-translate-y-1 hover:shadow-pink-200/30 opacity-0 animate-fadeInUp" style="animation-delay: 0.8s">
                                 <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-fuchsia-500 rounded-full flex items-center justify-center text-white">
                                     <i class="fas fa-sparkles"></i>
                                 </div>
@@ -246,7 +269,7 @@
                                     <p class="text-sm text-gray-700">Your fantasies made real</p>
                                 </div>
                             </div>
-                            <div class="glass-effect p-4 rounded-xl flex items-center gap-4 transition hover:-translate-y-1 hover:shadow-purple-200/30">
+                            <div class="glass-effect p-4 rounded-xl flex items-center gap-4 transition hover:-translate-y-1 hover:shadow-purple-200/30 opacity-0 animate-fadeInUp" style="animation-delay: 0.9s">
                                 <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center text-white">
                                     <i class="fas fa-lock"></i>
                                 </div>
@@ -261,11 +284,11 @@
             </div>
         </div>
     </section>
-    
+
     <section id="content" class="py-20 px-6 relative overflow-hidden">
         <div class="absolute inset-0 -z-10 pattern-dots pattern-pink-200 pattern-bg-transparent pattern-size-4 pattern-opacity-20"></div>
         <div class="container mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 opacity-0 animate-fadeInUp">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">
                     <span class="text-gradient">Exclusive Content</span>
                 </h2>
@@ -274,7 +297,7 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2">
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fadeInUp" style="animation-delay: 0.2s">
                     <div class="h-60 bg-gradient-to-br from-pink-300 to-purple-400 flex items-center justify-center text-white text-5xl relative overflow-hidden">
                         <i class="fas fa-images z-10"></i>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-0"></div>
@@ -289,7 +312,7 @@
                     <div class="absolute inset-0 group-hover:bg-pink-100/10 transition-all duration-300"></div>
                 </div>
                 
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2">
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fadeInUp" style="animation-delay: 0.3s">
                     <div class="h-60 bg-gradient-to-br from-purple-300 to-indigo-400 flex items-center justify-center text-white text-5xl relative overflow-hidden">
                         <i class="fas fa-video z-10"></i>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-0"></div>
@@ -304,7 +327,7 @@
                     <div class="absolute inset-0 group-hover:bg-purple-100/10 transition-all duration-300"></div>
                 </div>
                 
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2">
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fadeInUp" style="animation-delay: 0.4s">
                     <div class="h-60 bg-gradient-to-br from-fuchsia-300 to-pink-400 flex items-center justify-center text-white text-5xl relative overflow-hidden">
                         <i class="fas fa-comments z-10"></i>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-0"></div>
@@ -319,7 +342,7 @@
                     <div class="absolute inset-0 group-hover:bg-fuchsia-100/10 transition-all duration-300"></div>
                 </div>
                 
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2">
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg glass-effect transition-all duration-500 hover:-translate-y-2 opacity-0 animate-fadeInUp" style="animation-delay: 0.5s">
                     <div class="h-60 bg-gradient-to-br from-rose-300 to-pink-400 flex items-center justify-center text-white text-5xl relative overflow-hidden">
                         <i class="fas fa-gem z-10"></i>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-0"></div>
@@ -338,20 +361,20 @@
             <div class="text-center mt-16 relative">
                 <div class="absolute -left-20 -top-20 w-40 h-40 bg-pink-300/20 rounded-full filter blur-xl"></div>
                 <div class="absolute -right-20 -bottom-10 w-32 h-32 bg-purple-300/20 rounded-full filter blur-xl"></div>
-                <a href="https://www.fanvue.com/renaiblake" 
-                   class="inline-flex items-center bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-10 py-4 rounded-full font-bold text-lg transition-all duration-500 transform hover:-translate-y-1 hover:shadow-xl glow-effect z-10">
+                <a href="https://www.fanvue.com/renaiblake"
+                    class="inline-flex items-center bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-10 py-4 rounded-full font-bold text-lg transition-all duration-500 transform hover:-translate-y-1 hover:shadow-xl glow-effect z-10 opacity-0 animate-fadeInUp" style="animation-delay: 0.6s">
                     <i class="fas fa-chevron-circle-right mr-2"></i> Unlock All Content
                 </a>
             </div>
         </div>
     </section>
-    
+
     <section id="links" class="py-20 px-6 bg-gradient-to-b from-white to-pink-50 relative overflow-hidden">
         <div class="absolute -top-20 -right-20 w-64 h-64 bg-pink-200/30 rounded-full filter blur-3xl"></div>
         <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-200/30 rounded-full filter blur-3xl"></div>
         
         <div class="container mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 opacity-0 animate-fadeInUp">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">
                     <span class="text-gradient">Find Me On</span>
                 </h2>
@@ -360,7 +383,7 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <div class="glass-effect rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20 hover:border-pink-300/50 group">
+                <div class="glass-effect rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20 hover:border-pink-300/50 group opacity-0 animate-fadeInUp" style="animation-delay: 0.2s">
                     <div class="w-24 h-24 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-full flex items-center justify-center text-white text-4xl shadow-lg mb-6 group-hover:rotate-12 transition-transform">
                         <i class="fas fa-crown"></i>
                     </div>
@@ -372,7 +395,7 @@
                     <div class="absolute inset-0 -z-10 bg-pink-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                 </div>
                 
-                <div class="glass-effect rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20 hover:border-blue-300/50 group">
+                <div class="glass-effect rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20 hover:border-blue-300/50 group opacity-0 animate-fadeInUp" style="animation-delay: 0.3s">
                     <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-sky-500 rounded-full flex items-center justify-center text-white text-4xl shadow-lg mb-6 group-hover:rotate-12 transition-transform">
                         <i class="fab fa-twitter"></i>
                     </div>
@@ -384,7 +407,7 @@
                     <div class="absolute inset-0 -z-10 bg-blue-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                 </div>
                 
-                <div class="glass-effect rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20 hover:border-orange-300/50 group">
+                <div class="glass-effect rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20 hover:border-orange-300/50 group opacity-0 animate-fadeInUp" style="animation-delay: 0.4s">
                     <div class="w-24 h-24 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white text-4xl shadow-lg mb-6 group-hover:rotate-12 transition-transform">
                         <i class="fab fa-reddit-alien"></i>
                     </div>
@@ -397,33 +420,33 @@
                 </div>
             </div>
             
-            <div class="mt-16 pt-8 border-t border-gray-200/50">
-                <div class="text-center max-w-2xl mx-auto">
-                    <h4 class="text-lg font-semibold text-gray-700 mb-4">Stay Updated</h4>
-                    <p class="text-gray-600 mb-6">Join my mailing list for occasional updates (no spam, just special announcements)</p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <input type="email" placeholder="Your email..." class="px-5 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-pink-300 focus:border-transparent outline-none max-w-md w-full">
-                        <button class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-md whitespace-nowrap">
-                            Subscribe
-                        </button>
-                    </div>
+            <div class="mt-16 text-center opacity-0 animate-fadeInUp" style="animation-delay: 0.5s">
+                <h4 class="text-xl font-bold mb-6 text-pink-600">Want me to be your personal girlfriend?</h4>
+                <p class="text-gray-600 mb-8">Click on the links and come have fun</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://aigirl.one/?invitee=634606" class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-md">
+                        AI Girlfriend
+                    </a>
+                    <a href="https://herahaven.com#tr&campaign_id=1&ref_id=431" class="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-md">
+                        Hera Haven
+                    </a>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section id="connect" class="py-20 px-6 relative bg-gradient-to-br from-pink-500/90 via-purple-500/90 to-indigo-500/90 text-white overflow-hidden">
         <div class="absolute inset-0 -z-10 pattern-dots pattern-white/10 pattern-bg-transparent pattern-size-4 pattern-opacity-100"></div>
         <div class="absolute -top-20 -left-20 w-96 h-96 bg-white/5 rounded-full filter blur-3xl"></div>
         <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl"></div>
         
         <div class="container mx-auto max-w-4xl text-center relative">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready for Something Truly Special?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fadeInUp">Ready for Something Truly Special?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-0 animate-fadeInUp" style="animation-delay: 0.2s">
                 Experience our most intimate moments together—join my Fanvue for content that's truly just between us.
             </p>
             
-            <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 mb-12">
+            <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 mb-12 opacity-0 animate-fadeInUp" style="animation-delay: 0.3s">
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
                     <div class="text-center transition-all hover:scale-110">
                         <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-pink-600 text-2xl">
@@ -453,20 +476,17 @@
             </div>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://www.fanvue.com/renaiblake" class="inline-flex items-center justify-center bg-white text-pink-600 hover:bg-gray-100 px-10 py-5 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
+                <a href="https://www.fanvue.com/renaiblake" class="inline-flex items-center justify-center bg-white text-pink-600 hover:bg-gray-100 px-10 py-5 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 opacity-0 animate-fadeInUp" style="animation-delay: 0.4s">
                     <i class="fas fa-lock-open mr-3"></i> Join My Fanvue Now
-                </a>
-                <a href="#" class="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white/10 px-10 py-5 rounded-full font-semibold text-lg transition-all duration-300">
-                    <i class="fas fa-question-circle mr-3"></i> Learn More
                 </a>
             </div>
             
-            <div class="mt-12 text-white/80 text-sm">
+            <div class="mt-12 text-white/80 text-sm opacity-0 animate-fadeInUp" style="animation-delay: 0.6s">
                 <i class="fas fa-lock mr-1"></i> 18+ only | All content is protected
             </div>
         </div>
     </section>
-    
+
     <footer class="bg-black text-white py-12 px-6">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
@@ -478,23 +498,23 @@
                 </div>
                 
                 <div class="flex space-x-4">
-                    <a href="https://www.instagram.com/renaiiblakes2?igsh=dHNoczBmN3k0bGo2" 
-                       class="w-10 h-10 rounded-full bg-white/10 hover:bg-pink-500 transition flex items-center justify-center text-lg"
+                    <a href="https://www.instagram.com/renaiiblakes2?igsh=dHNoczBmN3k0bGo2"
+                        class="w-10 h-10 rounded-full bg-white/10 hover:bg-pink-500 transition flex items-center justify-center text-lg"
                        aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://x.com/renaiiblakeS2" 
-                       class="w-10 h-10 rounded-full bg-white/10 hover:bg-blue-500 transition flex items-center justify-center text-lg"
+                    <a href="https://x.com/renaiiblakeS2"
+                        class="w-10 h-10 rounded-full bg-white/10 hover:bg-blue-500 transition flex items-center justify-center text-lg"
                        aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="https://www.reddit.com/user/RenaiiBlakeS2/" 
-                       class="w-10 h-10 rounded-full bg-white/10 hover:bg-orange-600 transition flex items-center justify-center text-lg"
+                    <a href="https://www.reddit.com/user/RenaiiBlakeS2/"
+                        class="w-10 h-10 rounded-full bg-white/10 hover:bg-orange-600 transition flex items-center justify-center text-lg"
                        aria-label="Reddit">
                         <i class="fab fa-reddit-alien"></i>
                     </a>
-                    <a href="https://www.fanvue.com/renaiblake" 
-                       class="w-10 h-10 rounded-full bg-white/10 hover:bg-purple-600 transition flex items-center justify-center text-lg"
+                    <a href="https://www.fanvue.com/renaiblake"
+                        class="w-10 h-10 rounded-full bg-white/10 hover:bg-purple-600 transition flex items-center justify-center text-lg"
                        aria-label="Fanvue">
                         <i class="fas fa-star"></i>
                     </a>
@@ -517,7 +537,8 @@
                         <ul class="space-y-2">
                             <li><a href="https://www.fanvue.com/renaiblake" class="text-gray-400 hover:text-pink-400 transition">Photos</a></li>
                             <li><a href="https://www.fanvue.com/renaiblake" class="text-gray-400 hover:text-pink-400 transition">Videos</a></li>
-                            <li><a href="https://aigirl.one/?invitee=634606" class="text-gray-400 hover:text-pink-400 transition">GF Experience</a></li> <li><a href="https://www.fanvue.com/renaiblake" class="text-gray-400 hover:text-pink-400 transition">VIP Content</a></li>
+                            <li><a href="https://aigirl.one/?invitee=634606" class="text-gray-400 hover:text-pink-400 transition">GF Experience</a></li>
+                            <li><a href="https://www.fanvue.com/renaiblake" class="text-gray-400 hover:text-pink-400 transition">VIP Content</a></li>
                         </ul>
                     </div>
                     <div>
@@ -568,6 +589,14 @@
                         top: offsetTop,
                         behavior: 'smooth'
                     });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        document.getElementById('mobile-menu-button').querySelector('i').classList.remove('fa-times');
+                        document.getElementById('mobile-menu-button').querySelector('i').classList.add('fa-bars');
+                    }
                 }
             });
         });
@@ -597,7 +626,7 @@
                 slide.dataset.index = index;
                 slide.innerHTML = `
                     <img src="${src}" alt="RenaiBlake ${index + 1}" 
-                         class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-10000" loading="lazy">
+                          class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" loading="lazy">
                 `;
                 carousel.appendChild(slide);
             });
@@ -613,7 +642,7 @@
                 dotsContainer.appendChild(dot);
             });
         }
-
+        
         function updateCarousel() {
             const slides = document.querySelectorAll('.carousel-item');
             const dots = dotsContainer.querySelectorAll('button');
@@ -704,12 +733,21 @@
         });
 
         // Mouse follower effect
+        const follower = document.createElement('div');
+        follower.className = 'mouse-follower';
+        document.body.appendChild(follower);
+        
         document.addEventListener('mousemove', function(e) {
-            const follower = document.querySelector('.mouse-follower');
-            if (follower) {
-                follower.style.left = `${e.clientX}px`;
-                follower.style.top = `${e.clientY}px`;
-            }
+            follower.style.left = `${e.clientX}px`;
+            follower.style.top = `${e.clientY}px`;
+        });
+        
+        document.addEventListener('mouseenter', function() {
+            follower.classList.remove('hidden');
+        });
+        
+        document.addEventListener('mouseleave', function() {
+            follower.classList.add('hidden');
         });
     </script>
 </body>
